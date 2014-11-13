@@ -16,8 +16,9 @@ function reviewer(config) {
 		start: function () {
 			console.log('Start');
 
-			analyzer.getFiles(config.paths.at, function(files){
-				console.log('Files: ' + files);
+			analyzer.getFiles(config.paths.at, function(er, files){
+				console.log('Files: ');
+				console.log(files);
 			});
 		}
 	};
