@@ -15,7 +15,10 @@ function reviewer(config) {
 	return {
 		start: function () {
 			console.log('Start');
-			analyzer.getFiles(config.paths.at);
+
+			analyzer.getFiles(config.paths.at, function(files){
+				console.log('Files: ' + files);
+			});
 		}
 	};
 }
