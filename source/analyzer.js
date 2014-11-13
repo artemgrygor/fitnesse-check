@@ -6,6 +6,10 @@ var async = require('async');
 
 function getFiles (dir, callback){
 
+	function getFileContent(filePath, next){
+		fs.readFile(filePath, 'utf-8', next);
+	}
+
 	function aggregate(next) {
 		fs.readdir(dir, next);
 	}
@@ -17,7 +21,7 @@ function getFiles (dir, callback){
 		});
 		var paths = filtered.map(function (file) { return path.join(dir, file); });
 
-		async.map(paths, fs.readFile, function (er, data) {
+		async.map(paths, getFileContent, function (er, data) {
         	next(er, paths, data);
       	});
 	}
