@@ -17,7 +17,9 @@ function buildRow(test){
 	return '<tr>' +
 				'<td>' + test.name + '</td>' +
 				'<td><a target="_blank" href="' + test.localFitness + '">' + '<i class="fa fa-external-link"></i>' + '<a></td>' +
-				'<td><a href="file:///' + test.path + '">' + test.path + '</a></td>' +
+				'<td>Owner</td>' +
+				'<td>Today</td>' +
+				'<td>' + test.path + '</td>' +
 				'</tr>';
 }
 
@@ -26,6 +28,8 @@ function buildHtml(tests) {
   				'<thead><tr>' +
   				'<th>Name</th>' +
   				'<th>Link to local</th>' +
+  				'<th>Last change by</th>' +
+  				'<th>Last change on</th>' +
   				'<th>Path file</th>' +
   				'</tr></thead>';
     
