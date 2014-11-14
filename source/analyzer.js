@@ -1,9 +1,10 @@
 'use strict';
 
-var _ = require('underscore');
 var fs = require('fs');
 var path = require('path');
 var async = require('async');
+var _ = require('underscore');
+var recursive = require('recursive-readdir');
 
 function getFiles (dir, callback){
 
@@ -12,23 +13,22 @@ function getFiles (dir, callback){
 	}
 
 	function aggregate(next) {
-		fs.readdir(dir, next);
+		recursive(dir, ['*.!(xml)'], next);
 	}
 
 	function filter(aggregated, next) {
 
 		var filtered = aggregated.filter(function (item) {
-			return item ==='properties.xml';
+			return path.basename(item) ==='properties.xml';
 		});
-		var paths = filtered.map(function (file) { return path.join(dir, file); });
 
-		async.map(paths, getFileContent, function (er, data) {
-			if(paths.length !== data.length){
+		async.map(filtered, getFileContent, function (er, data) {
+			if(filtered.length !== data.length){
 				throw new Error('some file content is missing');
 			}
 
 			var fileWithContent = [];
-			_.each(paths, function(filePath, idx){
+			_.each(filtered, function(filePath, idx){
 				fileWithContent.push({
 					path: filePath,
 					content: data[idx]
@@ -39,13 +39,15 @@ function getFiles (dir, callback){
       	});
 	}
 
-	function inspect(paths, next){
+	function inspect(files, next){
 
-		// var filtered = contents.filter(function (item) {
-		// 	console.log(item);
-		// 	return true;
-		// });
-		next(null, paths);
+		var filtered = _.filter(files, function(file){
+			if(file.content.indexOf('<Test/>') > -1){
+				return false;
+			}
+			return true;
+		});
+		next(null, filtered);
 	}
 
 	async.waterfall([
