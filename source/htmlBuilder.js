@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 var _ = require('underscore');
 
 function buildHead(){
@@ -11,15 +12,16 @@ function buildHead(){
     	'</head>';
 }
 
-function buildRow(file){
+function buildRow(test){
+	
 	return '<tr>' +
-				'<td>' + file.path + '</td>' +
+				'<td>' + test.name + '</td>' +
 				'<td><a href="' + 'http://localhost:8086/ConstructionMigration.CasContract.ChangeOrder' + '">asdf<a></td>' +
-				'<td>' + file.title + '</td>' +
+				'<td><a href="file:///' + test.path + '">Open</a></td>' +
 				'</tr>';
 }
 
-function buildHtml(files) {
+function buildHtml(tests) {
   	var body = '<table class="table table-striped table-bordered table-hover table-condensed">' +
   				'<thead><tr>' +
   				'<th>Title</th>' +
@@ -28,15 +30,15 @@ function buildHtml(files) {
   				'</tr></thead>';
     
     body += '<tbody>';
-    _.each(files, function(file){
-    	body += buildRow(file);
+    _.each(tests, function(test){
+    	body += buildRow(test);
     });
 
 	body += '</tbody></table>';
   	return buildHead() + '<body>' + body + '</body></html>';
 }
 
-function generate(files){
+function generate(tests){
 
 	if(!fs.existsSync('./build')){
 		fs.mkdirSync('./build');
@@ -46,7 +48,7 @@ function generate(files){
 	var stream = fs.createWriteStream(fileName);
 
 	stream.once('open', function() {
-	  var html = buildHtml(files);
+	  var html = buildHtml(tests);
 
 	  stream.end(html);
 	});

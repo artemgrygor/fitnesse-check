@@ -37,15 +37,16 @@ function getFiles (callback){
 				throw new Error('some file content is missing');
 			}
 
-			var fileWithContent = [];
+			var tests = [];
 			_.each(filtered, function(filePath, idx){
-				fileWithContent.push({
+				tests.push({
+					name: path.dirname(filePath).split(path.sep).pop(),
 					path: filePath,
 					content: data[idx]
 				});
 			});
 
-        	next(er, fileWithContent);
+        	next(er, tests);
       	});
 	}
 
