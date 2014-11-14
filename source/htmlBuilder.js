@@ -8,13 +8,15 @@ function buildHead(){
     	'<html>' +
     	'<head>' +
     	'<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">' +
+    	'<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">' +
+    	'<title>AT review</title>' +
     	'</head>';
 }
 
 function buildRow(test){
 	return '<tr>' +
 				'<td>' + test.name + '</td>' +
-				'<td><a href="' + test.localFitness + '">asdf<a></td>' +
+				'<td><a target="_blank" href="' + test.localFitness + '">' + '<i class="fa fa-external-link"></i>' + '<a></td>' +
 				'<td><a href="file:///' + test.path + '">' + test.path + '</a></td>' +
 				'</tr>';
 }
