@@ -22,6 +22,9 @@ function getFiles (dir, callback){
 		var paths = filtered.map(function (file) { return path.join(dir, file); });
 
 		async.map(paths, getFileContent, function (er, data) {
+			console.log(data);
+			//var fileWithContent = filtered.map(function (file) { return path.join(dir, file); });
+
         	next(er, paths, data);
       	});
 	}
