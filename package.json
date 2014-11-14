@@ -11,6 +11,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "recursive-readdir": "^1.2.0",
+    "svn-spawn": "^0.1.4",
     "underscore": "^1.6.0"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 'use strict';
 
 var analyzer = require('./source/analyzer');
+var svnAnalyzer = require('./source/svnAnalyzer');
 var builder = require('./source/htmlBuilder');
 
 function reviewer() {
@@ -16,7 +17,7 @@ function reviewer() {
 				// console.log(files);
 				console.log('\nTotal: ' + files.length);
 				console.log('_________________________________________');
-
+				svnAnalyzer.review();
 				builder.generate(files);
 			});
 		}
