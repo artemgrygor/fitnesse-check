@@ -50,18 +50,20 @@ function getFiles (callback){
       	});
 	}
 
-	function inspect(files, next){
+	function inspect(tests, next){
 
-		var filtered = _.filter(files, function(file){
-			if(file.content.indexOf('<Test/>') > -1){
+		var filtered = _.filter(tests, function(test){
+			if(_.contains(config.exclusions, test.name)){
+				return false;
+			}
+
+			if(test.content.indexOf('<Test/>') > -1){
 				return false;
 			}
 			return true;
 		});
 		next(null, filtered);
 	}
-
-	
 
 	async.waterfall([
 		aggregate,

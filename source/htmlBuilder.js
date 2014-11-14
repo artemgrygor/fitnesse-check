@@ -24,7 +24,7 @@ function buildRow(test){
 function buildHtml(tests) {
   	var body = '<table class="table table-striped table-bordered table-hover table-condensed">' +
   				'<thead><tr>' +
-  				'<th>Title</th>' +
+  				'<th>Name</th>' +
   				'<th>Link to local</th>' +
   				'<th>Path file</th>' +
   				'</tr></thead>';
