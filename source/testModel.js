@@ -11,8 +11,7 @@ function getLocalFitness(filePath){
 	var testDir = path.dirname(filePath);
 	var subUrl = testDir.substring(testDir.indexOf('FitNesseRoot') + 12, testDir.length);
 	
-	var fitNesse = path.join(config.fitNesseRoot, subUrl.replace(path.sep, '.'));
-	return fitNesse;
+	return path.join(config.fitNesseRoot, subUrl.split(path.sep).join('.'));
 }
 
 function create(filePath, content){
