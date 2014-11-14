@@ -1,3 +1,5 @@
+var svn = require('./svn.conf.js').svn;
+
 module.exports = {
 	paths: {
 		js: ['./app.js', './source/*.js', './source/**/*.js'],
@@ -7,8 +9,8 @@ module.exports = {
 	exclusions: ['SetUp', 'UiTest'],
 	fitNesseRoot: 'http://localhost:8086/',
 	svn:{
-		cwd: '/path to your svn working directory',
-		username: 'username', // optional if authentication not required or is already saved
-		password: 'password', // optional if authentication not required or is already saved
+		cwd: svn.cwd,
+		username: svn.username, // optional if authentication not required or is already saved
+		password: svn.password, // optional if authentication not required or is already saved
 	}
 };
