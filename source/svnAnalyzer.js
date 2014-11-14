@@ -10,9 +10,14 @@ function review(){
 	    password: config.svn.password
 	});
 
-	client.getInfo(function(err, data) {
+	// client.getInfo(function(err, data) {
+	// 	// console.log(err);
+	//     console.log('Repository url is %s', data.url);
+	// });
+
+	client.cmd(['blame', 'Code//CommonAssemblyInfo.cs'], function(err, data) {
 		// console.log(err);
-	    console.log('Repository url is %s', data.url);
+	    console.log('Repository url is %s', data);
 	});
 }
 
