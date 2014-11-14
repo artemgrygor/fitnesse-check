@@ -6,14 +6,24 @@ var async = require('async');
 var _ = require('underscore');
 var recursive = require('recursive-readdir');
 
-function getFiles (dir, callback){
+var config = require('./../config');
+
+function getFiles (callback){
 
 	function getFileContent(filePath, next){
 		fs.readFile(filePath, 'utf-8', next);
 	}
 
 	function aggregate(next) {
-		recursive(dir, ['*.!(xml)'], next);
+		if (!config) {
+			throw new Error('config is missing');
+		}
+
+		if (!config.paths.at) {
+			throw new Error('config.monitor section is missing');
+		}
+
+		recursive(config.paths.at, ['*.!(xml)'], next);
 	}
 
 	function filter(aggregated, next) {
@@ -49,6 +59,8 @@ function getFiles (dir, callback){
 		});
 		next(null, filtered);
 	}
+
+	
 
 	async.waterfall([
 		aggregate,

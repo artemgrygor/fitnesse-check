@@ -1,30 +1,26 @@
 'use strict';
 
-var config = require('./config');
 var analyzer = require('./source/analyzer');
+var builder = require('./source/htmlBuilder');
 
-function reviewer(config) {
-	if (!config) {
-		throw new Error('config is missing');
-	}
-
-	if (!config.paths.at) {
-		throw new Error('config.monitor section is missing');
-	}
+function reviewer() {
+	
 
 	return {
 		start: function () {
 			console.log('Start');
 
-			analyzer.getFiles(config.paths.at, function(er, files){
+			analyzer.getFiles(function(er, files){
 				console.log('_________________________________________');
 				console.log('Files: \n');
 				console.log(files);
 				console.log('\nTotal: ' + files.length);
 				console.log('_________________________________________');
+
+				builder.generate(files);
 			});
 		}
 	};
 }
 
-reviewer(config).start();
+reviewer().start();
