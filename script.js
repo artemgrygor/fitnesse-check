@@ -12,8 +12,8 @@ function reviewer() {
 
 			analyzer.getFiles(function(er, files){
 				console.log('_________________________________________');
-				console.log('Files: \n');
-				console.log(files);
+				// console.log('Files: \n');
+				// console.log(files);
 				console.log('\nTotal: ' + files.length);
 				console.log('_________________________________________');
 
