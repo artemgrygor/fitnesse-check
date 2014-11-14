@@ -7,6 +7,7 @@ var _ = require('underscore');
 var recursive = require('recursive-readdir');
 
 var config = require('./../config');
+var testModel = require('./testModel');
 
 function getFiles (callback){
 
@@ -39,11 +40,7 @@ function getFiles (callback){
 
 			var tests = [];
 			_.each(filtered, function(filePath, idx){
-				tests.push({
-					name: path.dirname(filePath).split(path.sep).pop(),
-					path: filePath,
-					content: data[idx]
-				});
+				tests.push(testModel.create(filePath, data[idx]));
 			});
 
         	next(er, tests);

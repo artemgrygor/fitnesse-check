@@ -3,5 +3,6 @@ module.exports = {
 		js: ['./app.js', './source/*.js', './source/**/*.js'],
 		at: 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot\\ConstructionMigration\\FieldManagerContract'
 	},
-	exclusions: ['SetUp', 'UiTest']
+	exclusions: ['SetUp', 'UiTest'],
+	fitNesseRoot: 'http://localhost:8086/'
 };

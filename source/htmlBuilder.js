@@ -1,7 +1,6 @@
 'use strict';
 
 var fs = require('fs');
-var path = require('path');
 var _ = require('underscore');
 
 function buildHead(){
@@ -13,11 +12,10 @@ function buildHead(){
 }
 
 function buildRow(test){
-	
 	return '<tr>' +
 				'<td>' + test.name + '</td>' +
-				'<td><a href="' + 'http://localhost:8086/ConstructionMigration.CasContract.ChangeOrder' + '">asdf<a></td>' +
-				'<td><a href="file:///' + test.path + '">Open</a></td>' +
+				'<td><a href="' + test.localFitness + '">asdf<a></td>' +
+				'<td><a href="file:///' + test.path + '">' + test.path + '</a></td>' +
 				'</tr>';
 }
 
