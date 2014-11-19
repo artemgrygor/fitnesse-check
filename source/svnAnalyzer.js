@@ -1,6 +1,8 @@
 'use strict';
 
 var config = require('./../config');
+
+var _ = require('underscore');
 var Client = require('svn-spawn');
 
 function review(){
@@ -10,14 +12,13 @@ function review(){
 	    password: config.svn.password
 	});
 
-	// client.getInfo(function(err, data) {
-	// 	// console.log(err);
-	//     console.log('Repository url is %s', data.url);
-	// });
-
-	client.cmd(['blame', 'Code//CommonAssemblyInfo.cs'], function(err, data) {
-		// console.log(err);
-	    console.log('Repository url is %s', data);
+	client.cmd(['blame', 'Requirements//AcceptanceTests//FitNesseRoot//ConstructionMigration//FieldManagerContract//ContractTime//properties.xml'], function(err, data) {
+		var row = _.find(data.split('\n'), function(row) { return row.indexOf('<Normal/>') > 0; });
+		console.log('---');
+		var columns = _.filter(row.trim().split(' '), function(item) { 
+			return item !== '' && !_.isNull(item); 
+		});
+		console.log(columns.length);
 	});
 }
 

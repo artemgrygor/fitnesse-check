@@ -11,14 +11,12 @@ function reviewer() {
 		start: function () {
 			console.log('Start');
 
-			analyzer.getFiles(function(er, files){
+			analyzer.getFiles(function(er, tests){
 				console.log('_________________________________________');
-				// console.log('Files: \n');
-				// console.log(files);
-				console.log('\nTotal: ' + files.length);
+				console.log('\nTotal: ' + tests.length);
 				console.log('_________________________________________');
-				svnAnalyzer.review();
-				builder.generate(files);
+				svnAnalyzer.review(tests);
+				builder.generate(tests);
 			});
 		}
 	};
