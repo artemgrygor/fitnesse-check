@@ -3,23 +3,49 @@
 var config = require('./../config');
 
 var _ = require('underscore');
+var async = require('async');
 var Client = require('svn-spawn');
 
-function review(){
+function convertToSvnPath(path){
+	return path.substring(config.svn.cwd.length + 1, path.length).split('\\').join('//');
+}
+
+function callSvn(client, test, callback){
+
+	var path = convertToSvnPath(test.path);
+	client.cmd(['blame', path], function(err, data) {
+		
+		var row = _.find(data.split('\n'), function(row) { 
+			return row.indexOf('<Normal/>') > 0; 
+		});
+		if(!_.isUndefined(row)){
+			var columns = _.filter(row.trim().split(' '), function(item) { 
+				return item !== '' && !_.isNull(item); 
+			});
+			if(columns.length > 1){
+				test.revision = columns[0];
+				test.changedBy = columns[1];
+			}
+		}
+
+		callback();
+	});
+}
+
+function review(tests, callback){
 	var client = new Client({
 	    cwd: config.svn.cwd,
 	    username: config.svn.username,
 	    password: config.svn.password
 	});
 
-	client.cmd(['blame', 'Requirements//AcceptanceTests//FitNesseRoot//ConstructionMigration//FieldManagerContract//ContractTime//properties.xml'], function(err, data) {
-		var row = _.find(data.split('\n'), function(row) { return row.indexOf('<Normal/>') > 0; });
-		console.log('---');
-		var columns = _.filter(row.trim().split(' '), function(item) { 
-			return item !== '' && !_.isNull(item); 
+	async.each(tests, 
+		function(item, callback){
+			callSvn(client, item, callback);
+		}, 
+		function(err) {
+			callback(tests);
 		});
-		console.log(columns.length);
-	});
 }
 
 module.exports = {

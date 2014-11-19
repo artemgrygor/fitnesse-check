@@ -19,7 +19,9 @@ function create(filePath, content){
 		name: getTestName(filePath),
 		path: filePath,
 		content: content,
-		localFitness: getLocalFitness(filePath)
+		localFitness: getLocalFitness(filePath),
+		changedBy: null,
+		revision: null
 	};
 }
 

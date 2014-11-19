@@ -17,8 +17,8 @@ function buildRow(test){
 	return '<tr>' +
 				'<td>' + test.name + '</td>' +
 				'<td><a target="_blank" href="' + test.localFitness + '">' + '<i class="fa fa-external-link"></i>' + '<a></td>' +
-				'<td>Owner</td>' +
-				'<td>Today</td>' +
+				'<td>' + test.changedBy + '</td>' +
+				'<td>' + test.revision + '</td>' +
 				'<td>' + test.path + '</td>' +
 				'</tr>';
 }
@@ -29,7 +29,7 @@ function buildHtml(tests) {
   				'<th>Name</th>' +
   				'<th>Link to local</th>' +
   				'<th>Last change by</th>' +
-  				'<th>Last change on</th>' +
+  				'<th>Revision</th>' +
   				'<th>Path file</th>' +
   				'</tr></thead>';
     
@@ -42,7 +42,7 @@ function buildHtml(tests) {
   	return buildHead() + '<body>' + body + '</body></html>';
 }
 
-function generate(tests){
+function generate(tests, callback){
 
 	if(!fs.existsSync('./build')){
 		fs.mkdirSync('./build');
@@ -52,9 +52,8 @@ function generate(tests){
 	var stream = fs.createWriteStream(fileName);
 
 	stream.once('open', function() {
-	  var html = buildHtml(tests);
-
-	  stream.end(html);
+		stream.end(buildHtml(tests));
+		callback();
 	});
 }
 

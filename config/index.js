@@ -3,8 +3,7 @@ var svn = require('./svn.conf.js').svn;
 module.exports = {
 	paths: {
 		js: ['./app.js', './source/*.js', './source/**/*.js'],
-		at: 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot\\ConstructionMigration\\FieldManagerContract'
-		// at: 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot\\ConstructionMigration'
+		at: 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot\\ConstructionMigration'
 	},
 	exclusions: ['SetUp', 'UiTest'],
 	fitNesseRoot: 'http://localhost:8086/',

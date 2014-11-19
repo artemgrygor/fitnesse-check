@@ -54,6 +54,12 @@ function getFiles (callback){
 				return false;
 			}
 
+			// all suites
+			if(test.content.indexOf('<Suite/>') > -1){
+				return false;
+			}
+
+			// turned on tests
 			if(test.content.indexOf('<Test/>') > -1){
 				return false;
 			}
