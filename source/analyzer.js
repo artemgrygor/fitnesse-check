@@ -30,12 +30,17 @@ function getFiles (callback){
 	function filter(aggregated, next) {
 
 		var filtered = aggregated.filter(function (item) {
-			return path.basename(item) ==='properties.xml';
+			return path.basename(item) ==='properties.xml' &&
+				item.indexOf('ErrorLogs') === -1;
 		});
 
-		async.map(filtered, getFileContent, function (er, data) {
+		async.mapLimit(filtered, 2000, getFileContent, function (er, data) {
 			if(filtered.length !== data.length){
-				throw new Error('some file content is missing');
+				console.log(er);
+				var msg = 'Filtered: ' + filtered.length + ' but loaded: ' + data.length;
+				console.log(msg);
+				// throw new Error('some file content is missing');
+				throw new Error(msg);
 			}
 
 			var tests = [];
@@ -45,12 +50,46 @@ function getFiles (callback){
 
         	next(er, tests);
       	});
+
+		// async.each(filtered, 
+		// 	function(item, callback){
+		// 		getFileContent(item, function(file){
+
+		// 		});
+		// 	},
+		// 	function(err) {
+		// 		callback(tests);
+		// 	});
+
+
+		// 	async.each(filtered, getFileContent, function (er, data) {
+		// 		if(filtered.length !== data.length){
+
+		// 			var msg = 'Filtered: ' + filtered.length + ' but loaded: ' + data.length;
+		// 			console.log(msg);
+		// 			// throw new Error('some file content is missing');
+		// 			throw new Error(msg);
+		// 		}
+
+		// 		var tests = [];
+		// 		_.each(filtered, function(filePath, idx){
+		// 			tests.push(testModel.create(filePath, data[idx]));
+		// 		});
+
+	 //        	next(er, tests);
+	 //      	});
 	}
 
 	function inspect(tests, next){
 
 		var filtered = _.filter(tests, function(test){
-			if(_.contains(config.exclusions, test.name)){
+			// if(_.contains(config.exclusions, test.name)){
+			// 	return false;
+			// }
+			var exc = _.find(config.exclusions, function(name){
+				return test.name.toLowerCase().indexOf(name) > -1;
+			});
+			if(!_.isUndefined(exc)){
 				return false;
 			}
 

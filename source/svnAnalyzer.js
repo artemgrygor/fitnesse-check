@@ -14,7 +14,13 @@ function callSvn(client, test, callback){
 
 	var path = convertToSvnPath(test.path);
 	client.cmd(['blame', path], function(err, data) {
-		
+		if(!_.isNull(err)){
+			callback();
+		}
+		if(_.isUndefined(data)){
+			callback();
+		}
+
 		var row = _.find(data.split('\n'), function(row) { 
 			return row.indexOf('<Normal/>') > 0; 
 		});
@@ -39,12 +45,12 @@ function review(tests, callback){
 	    password: config.svn.password
 	});
 
-	async.each(tests, 
+	async.eachLimit(tests, 100, 
 		function(item, callback){
 			callSvn(client, item, callback);
 		}, 
 		function(err) {
-			callback(tests);
+			callback(tests, err);
 		});
 }
 

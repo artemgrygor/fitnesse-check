@@ -14,11 +14,13 @@ function buildHead(){
 }
 
 function buildRow(test){
+	var changedBy = !_.isNull(test.changedBy)? test.changedBy : '';
+	var revision = !_.isNull(test.revision)? test.revision : '';
 	return '<tr>' +
 				'<td>' + test.name + '</td>' +
 				'<td><a target="_blank" href="' + test.localFitness + '">' + '<i class="fa fa-external-link"></i>' + '<a></td>' +
-				'<td>' + test.changedBy + '</td>' +
-				'<td>' + test.revision + '</td>' +
+				'<td>' + changedBy + '</td>' +
+				'<td>' + revision + '</td>' +
 				'<td>' + test.path + '</td>' +
 				'</tr>';
 }
@@ -34,6 +36,8 @@ function buildHtml(tests) {
   				'</tr></thead>';
     
     body += '<tbody>';
+
+    tests = _.sortBy(tests, function(item) { return item.name; });
     _.each(tests, function(test){
     	body += buildRow(test);
     });
