@@ -2,7 +2,7 @@
 
 var analyzer = require('./source/analyzer');
 var svnAnalyzer = require('./source/svnAnalyzer');
-var builder = require('./source/htmlBuilder');
+var htmlBuilder = require('./source/htmlBuilder');
 
 var async = require('async');
 
@@ -25,7 +25,13 @@ function reviewer() {
 			}
 
 			function buildReport(tests, next) {
-				builder.generate(tests, function(){
+				htmlBuilder.generate(tests, function(){
+					next(null, null);
+				});
+			}
+
+			function buildData(tests, next) {
+				jsonBuilder.generate(tests, function(){
 					next(null, null);
 				});
 			}
