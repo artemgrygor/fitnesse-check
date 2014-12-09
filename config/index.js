@@ -6,7 +6,8 @@ module.exports = {
 		at: 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot'
 		// at: 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot\\ConstructionMigration'
 	},
-	exclusions: ['setup', 'load', 'uitest', 'recentchanges'],
+	// exclusions: ['setup', 'load', 'uitest', 'recentchanges'],
+	exclusions: [],
 	fitNesseRoot: 'http://localhost:8086/',
 	svn:{
 		cwd: svn.cwd,
