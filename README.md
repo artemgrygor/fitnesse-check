@@ -31,12 +31,12 @@ module.exports = {
 All exclusions should be added to `index.js` file in [/config](/config) folder.
 
 ### Gulp tasks:
-* default - execute reviewer and creates `index.html` file in [/build](/build) folder with all turned off AT
+* `default` - execute reviewer and creates `index.html` file in [/build](/build) folder with all turned off AT
 gulp 
-* check - same as default
-* unit - runs all unit-test
-* lint - checks JsHint
-* watch - continuously executes lint task
+* `check` - same as default
+* `unit` - runs all unit-test
+* `lint` - checks JsHint
+* `watch` - continuously executes lint task
 
 ## License (MIT)
 Copyright (c) 2014,
