@@ -4,7 +4,7 @@
   "description": "Monitoring of Fitnesse AT and generating all turned off",
   "main": "./script.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp unit"
   },
   "author": "Artem Grygor",
   "license": "MIT",
