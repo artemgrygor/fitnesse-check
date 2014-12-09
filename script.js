@@ -44,6 +44,10 @@ function reviewer() {
 				console.log('End');
 				console.log('_________________________________________');
 			});
+			// var file = 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot\\ConstructionMigration\\FieldManagerContract\\ContractTime\\properties.xml';
+			// svnAnalyzer.test(file, function(){
+			// 	console.log('End');
+			// });
 		}
 	};
 }

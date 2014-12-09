@@ -55,8 +55,12 @@ function generate(tests, callback){
 	var fileName = './build/index.html';
 	var stream = fs.createWriteStream(fileName);
 
+	var turnedOffTest = _.filter(tests, function(test){
+		return !_.isNull(test.revision);
+	});
+
 	stream.once('open', function() {
-		stream.end(buildHtml(tests));
+		stream.end(buildHtml(turnedOffTest));
 		callback();
 	});
 }
