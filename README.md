@@ -16,6 +16,7 @@ $ npm install
 ### Requirements
 You need to have the svn command installed.
 
+### Configuration
 Create `svn.conf.js` file in [/config](/config) folder,
 ```js
 module.exports = {
