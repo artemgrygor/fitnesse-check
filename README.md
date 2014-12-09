@@ -3,13 +3,16 @@
 review all acceptance tests in the specific folders by property.xml and finds all turned off.
 Also it has SVN checker which summarize all turned off AT and collect svn-commit, account user.
 
-# How to use?
+## How to use?
 
-Clone repo,
-$ git clone git@github.com:artemgrygor/testreviewer.git
+Clone repository,
+```bash
+$ git clone git@github.com:artemgrygor/fitnesse-check.git
+$ npm install
+```
 
-Create svn.conf.js file,
-
+Create `svn.conf.js` file in [/config](/config) folder,
+```js
 module.exports = {
 	svn: {
 		cwd: '<PATH_TO_SVN_FOLDER>',
@@ -17,18 +20,22 @@ module.exports = {
 		password: '<ACCOUNT_PASSWORD>'
 	}
 };
+```
 
-install dependenices
+install dependencies
+```bash
 npm install
+```
 
-Gulp tasks:
-default task execute reviewer and creates .build/index.html with all turned off AT
+### Gulp tasks:
+* default - execute reviewer and creates `index.html` file in [/build](/build) folder with all turned off AT
 gulp 
+* check - same as default
+* unit - runs all unit-test
+* lint - checks JsHint
+* watch - continuously executes lint task
 
-unit - runs all unit-test
-lint - checks JsHint
-
-License (MIT)
+## License (MIT)
 Copyright (c) 2014,
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
