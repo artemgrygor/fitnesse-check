@@ -1,10 +1,13 @@
 'use strict';
 
+var _ = require('underscore');
 var path = require('path');
 var config = require('./../config');
 
 function getTestName(filePath){
-	return path.dirname(filePath).split(path.sep).pop();
+	return _.find(path.dirname(filePath).split(path.sep).reverse(), function(item){
+		return !_.isEmpty(item);
+	});
 }
 
 function getLocalFitness(filePath){

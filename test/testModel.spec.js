@@ -1,5 +1,8 @@
+var path = require('path');
 var expect = require('chai').expect;
+
 var testModel = require('../source/testModel');
+var config = require('../config');
 
 describe('Module: testModel', function(){
 
@@ -20,29 +23,71 @@ describe('Module: testModel', function(){
 					var filePath = '';
 
 					var result = testModel.create(filePath);
-					expect(result).to.have.property('name');
-					expect(result.name).to.equal('.');
+					expect(result).to.have.property('name')
+						.and.equal('.');
 				})
 
 				it('should return last part of path', function(){
-					var filePath = 'C:\\wtDev\\Requirements\\AcceptanceTests\\FitNesseRoot\\DataMigrationUtility\\AcceptanceTests\\properties.xml';
-
+					var filePath = '//AcceptanceTests//FitNesseRoot//DataMigrationUtility//AcceptanceTests//properties.xml';
+					
 					var result = testModel.create(filePath);
-					expect(result).to.have.property('name');
-					expect(result.name).to.equal('AcceptanceTests');
+					expect(result).to.have.property('name')
+						.and.equal('AcceptanceTests');
 				})
 			})
 
-			xit('should return object with properties', function(){
-				var result = testModel.create();
-				console.log(result);
-				// expect(result).to.have.property('name');
-				expect(result).to.have.property('path');
-				// expect(result).to.have.property('content');
-				// expect(result).to.have.property('localFitness');
-				// expect(result).to.have.property('changedBy')
-				// 	.and.equal(null);
-				// expect(result).to.have.property('revision');
+			describe('returns object with path property', function(){
+				it('should be same for empty', function(){
+					var filePath = 'asdf';
+
+					var result = testModel.create(filePath);
+					expect(result).to.have.property('path')
+						.and.equal(filePath);
+				})
+			})
+
+			describe('returns object with content property', function(){
+				it('should be same for empty', function(){
+					var filePath = 'asdf';
+					var content = 'content';
+
+					var result = testModel.create(filePath, content);
+					expect(result).to.have.property('content')
+						.and.equal(content);
+				})
+			})
+
+			describe('returns object with localFitness property', function(){
+				it('should be same for empty', function(){
+					var filePath = '//AcceptanceTests//FitNesseRoot//DataMigrationUtility//AcceptanceTests//properties.xml';
+					var content = 'content';
+
+					var result = testModel.create(filePath, content);
+					expect(result).to.have.property('localFitness')
+						.and.equal(path.join(config.fitNesseRoot + '..DataMigrationUtility..AcceptanceTests.'));
+				})
+			})
+
+			describe('returns object with changedBy property', function(){
+				it('should be same for empty', function(){
+					var filePath = '//AcceptanceTests//FitNesseRoot//DataMigrationUtility//AcceptanceTests//properties.xml';
+					var content = 'content';
+
+					var result = testModel.create(filePath, content);
+					expect(result).to.have.property('changedBy')
+						.and.equal(null);
+				})
+			})
+
+			describe('returns object with changedBy property', function(){
+				it('should be same for empty', function(){
+					var filePath = '//AcceptanceTests//FitNesseRoot//DataMigrationUtility//AcceptanceTests//properties.xml';
+					var content = 'content';
+
+					var result = testModel.create(filePath, content);
+					expect(result).to.have.property('revision')
+						.and.equal(null);
+				})
 			})
 		})
 	})
