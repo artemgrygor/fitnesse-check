@@ -13,8 +13,10 @@ Clone repository,
 $ git clone git@github.com:artemgrygor/fitnesse-check.git
 $ npm install
 ```
+or download as zip.
+
 ### Requirements
-You need to have the svn command installed.
+You need to have the `svn command` installed.
 
 ### Configuration
 Create `svn.conf.js` file in [/config](/config) folder,
