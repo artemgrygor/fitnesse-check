@@ -70,7 +70,7 @@ describe('Module: testModel', function(){
 
 			describe('returns object with changedBy property', function(){
 				it('should be same for empty', function(){
-					var filePath = '//AcceptanceTests//FitNesseRoot//DataMigrationUtility//AcceptanceTests//properties.xml';
+					var filePath = '';
 					var content = 'content';
 
 					var result = testModel.create(filePath, content);
@@ -81,7 +81,7 @@ describe('Module: testModel', function(){
 
 			describe('returns object with changedBy property', function(){
 				it('should be same for empty', function(){
-					var filePath = '//AcceptanceTests//FitNesseRoot//DataMigrationUtility//AcceptanceTests//properties.xml';
+					var filePath = '';
 					var content = 'content';
 
 					var result = testModel.create(filePath, content);
