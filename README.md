@@ -13,6 +13,8 @@ Clone repository,
 $ git clone git@github.com:artemgrygor/fitnesse-check.git
 $ npm install
 ```
+### Requirements
+You need to have the svn command installed.
 
 Create `svn.conf.js` file in [/config](/config) folder,
 ```js
@@ -23,11 +25,6 @@ module.exports = {
 		password: '<ACCOUNT_PASSWORD>'
 	}
 };
-```
-
-install dependencies
-```bash
-npm install
 ```
 
 All exclusions should be added to `index.js` file in [/config](/config) folder.
