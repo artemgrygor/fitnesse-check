@@ -93,14 +93,14 @@ function review(tests, callback){
 	    password: config.svn.password
 	});
 
-	async.eachLimit(tests, 100, 
+	async.eachLimit(tests, 10, 
 		function(item, callback){
 			
 			callSvnNormal(client, item, callback);
 		},
 		function() {
 
-			async.eachLimit(tests, 100, 
+			async.eachLimit(tests, 10, 
 				function(item, callback){
 					callSvnTest(client, item, callback);
 				}, function(err){
